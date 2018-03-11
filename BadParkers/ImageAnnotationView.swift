@@ -40,7 +40,6 @@ class ImageAnnotationView: MKAnnotationView {
                 [weak self] in let urlContents = try? Data(contentsOf: url)
                 DispatchQueue.main.async {
                     if let imageData = urlContents, url == self?.url {
-                        print("Yes")
                         self?.image = UIImage(data: imageData)
                     }
                 }

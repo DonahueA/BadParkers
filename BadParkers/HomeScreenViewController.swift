@@ -14,18 +14,17 @@ class HomeScreenViewController: UIViewController {
     @IBOutlet weak var MapView: MKMapView!
     let locationManager = CLLocationManager()
     
+    private lazy var annotationGetter = AnnotationRetriever(with: MapView.region)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         locationManager.requestWhenInUseAuthorization()
         MapView.delegate = self
-        MapView.setRegion(MKCoordinateRegion(center: (locationManager.location?.coordinate)!, span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)), animated: false)
-        
-        let newAnnotation = ImageAnnotation((locationManager.location?.coordinate)!, URL(string: "https://b.thumbs.redditmedia.com/p_mhrqWy_56i8-oMDS_48XRAybZd2nm-URldx4F6D0c.jpg")!)
-        MapView.addAnnotation(newAnnotation)
+        if let center = locationManager.location?.coordinate {
+            MapView.setRegion(MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)), animated: false)
+        }
+        annotationGetter.delegate = self
     }
-    
 }
 
 extension HomeScreenViewController: MKMapViewDelegate {
@@ -43,4 +42,21 @@ extension HomeScreenViewController: MKMapViewDelegate {
         }
         return view
     }
+    
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        print(mapView.centerCoordinate)
+    }
+
+    
+}
+
+extension HomeScreenViewController: AnnotationRetrieverDelegate {
+    func annotationsDidChange(annotations: [ImageAnnotation]) {
+        for annotation in annotations {
+            MapView.addAnnotation(annotation)
+        }
+    }
+    
+    
+    
 }
