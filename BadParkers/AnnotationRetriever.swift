@@ -30,22 +30,29 @@ class AnnotationRetriever {
     private(set) var ImageAnnotations : [ImageAnnotation] = []
     
     private func getImageAnnotations() {
-        db.collection("photoLocations").getDocuments(completion: {[weak self] (QuerySnapshot, err) in
+        
+        //TODO: Make asynchronous if need be
+        
+        //TODO: Change so we don't grab all locations, instead just those in our view.
+        db.collection("photoLocations").getDocuments(completion: {[unowned self] (QuerySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
+                
                 for document in QuerySnapshot!.documents {
                     print("\(document.documentID) => \(document.data())")
                     if let coordinates = document.data()["location"] as? GeoPoint {
+                        let newImage = ImageAnnotation(coordinates.CLLocation(), URL(string: "https://b.thumbs.redditmedia.com/p_mhrqWy_56i8-oMDS_48XRAybZd2nm-URldx4F6D0c.jpg")!)
                         
-                        
-                        self?.ImageAnnotations.append(ImageAnnotation(coordinates.CLLocation(), URL(string: "https://b.thumbs.redditmedia.com/p_mhrqWy_56i8-oMDS_48XRAybZd2nm-URldx4F6D0c.jpg")! ))
-                        
+                        if !self.ImageAnnotations.contains(newImage)
+                        {
+                            self.ImageAnnotations.append(newImage)
+                        }
                         
                     }
                 }
                 
-                self?.delegate?.annotationsDidChange(annotations: (self?.ImageAnnotations)!)
+                self.delegate?.annotationsDidChange(annotations: (self.ImageAnnotations))
             }
         })
         

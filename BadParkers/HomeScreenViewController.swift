@@ -43,9 +43,10 @@ extension HomeScreenViewController: MKMapViewDelegate {
         return view
     }
     
-    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        print(mapView.centerCoordinate)
-    }
+    //Useless since annotaitonGetter grabs all, not dependent on current region
+//    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated:
+//        annotationGetter.mapRegion = mapView.region
+//    }
 
     
 }
@@ -56,7 +57,6 @@ extension HomeScreenViewController: AnnotationRetrieverDelegate {
             MapView.addAnnotation(annotation)
         }
     }
-    
-    
+    //TODO: Remove Excess Annotations
     
 }
