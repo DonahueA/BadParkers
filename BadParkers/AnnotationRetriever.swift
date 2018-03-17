@@ -40,7 +40,6 @@ class AnnotationRetriever {
             } else {
                 
                 for document in QuerySnapshot!.documents {
-                    print("\(document.documentID) => \(document.data())")
                     if let coordinates = document.data()["location"] as? GeoPoint {
                         let newImage = ImageAnnotation(coordinates.CLLocation(), URL(string: "https://b.thumbs.redditmedia.com/p_mhrqWy_56i8-oMDS_48XRAybZd2nm-URldx4F6D0c.jpg")!)
                         
