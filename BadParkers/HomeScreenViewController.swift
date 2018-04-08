@@ -12,18 +12,33 @@ import MapKit
 class HomeScreenViewController: UIViewController {
 
     @IBOutlet weak var MapView: MKMapView!
+    @IBOutlet var cameraButton: UIImageView!
     let locationManager = CLLocationManager()
     
     private lazy var annotationGetter = AnnotationRetriever(with: MapView.region)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         locationManager.requestWhenInUseAuthorization()
         MapView.delegate = self
         if let center = locationManager.location?.coordinate {
             MapView.setRegion(MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)), animated: false)
         }
+        
+        let press = UITapGestureRecognizer(target: self, action: #selector(openCamera))
+        
+        cameraButton.addGestureRecognizer(press)
+        
         annotationGetter.delegate = self
+        
+    }
+    
+    @objc func openCamera() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.sourceType = .photoLibrary
+        imagePickerController.delegate = self
+        present(imagePickerController, animated: true, completion: nil)
     }
 }
 
@@ -59,4 +74,16 @@ extension HomeScreenViewController: AnnotationRetrieverDelegate {
     }
     //TODO: Remove Excess Annotations
     
+}
+
+extension HomeScreenViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        
+        dismiss(animated: true, completion: nil)
+    }
 }

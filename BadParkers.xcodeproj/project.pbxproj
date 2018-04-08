@@ -86,8 +86,8 @@
 		97D50E7C20548D87003FC60C /* BadParkers */ = {
 			isa = PBXGroup;
 			children = (
-				973034B92054C82A008935B4 /* ImageAnnotationView.swift */,
 				97D50E93205490B0003FC60C /* HomeScreenViewController.swift */,
+				973034B92054C82A008935B4 /* ImageAnnotationView.swift */,
 				973034B72054BC34008935B4 /* ImageAnnotation.swift */,
 				975CC3EF20559AA3002CC002 /* AnnotationRetriever.swift */,
 				97D50E7D20548D87003FC60C /* AppDelegate.swift */,

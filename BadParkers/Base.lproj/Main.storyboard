@@ -21,23 +21,32 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="QEM-mu-cYF">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                             </mapView>
+                            <imageView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CameraIcon" translatesAutoresizingMaskIntoConstraints="NO" id="VD2-3j-cV4">
+                                <rect key="frame" x="137" y="552" width="100" height="100"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="QEM-mu-cYF" firstAttribute="top" secondItem="BBW-V9-7m8" secondAttribute="top" id="3M0-sr-W7V"/>
-                            <constraint firstItem="BBW-V9-7m8" firstAttribute="bottom" secondItem="QEM-mu-cYF" secondAttribute="bottom" id="Zoq-E6-enz"/>
+                            <constraint firstItem="BBW-V9-7m8" firstAttribute="bottom" secondItem="VD2-3j-cV4" secondAttribute="bottom" constant="15" id="Ntd-aF-g37"/>
                             <constraint firstItem="QEM-mu-cYF" firstAttribute="leading" secondItem="BBW-V9-7m8" secondAttribute="leading" id="fGb-xu-9aM"/>
-                            <constraint firstItem="BBW-V9-7m8" firstAttribute="trailing" secondItem="QEM-mu-cYF" secondAttribute="trailing" id="kyZ-aB-5mo"/>
+                            <constraint firstItem="QEM-mu-cYF" firstAttribute="trailing" secondItem="BBW-V9-7m8" secondAttribute="trailing" id="kyZ-aB-5mo"/>
+                            <constraint firstItem="QEM-mu-cYF" firstAttribute="top" secondItem="BBW-V9-7m8" secondAttribute="top" id="nr0-XH-BVC"/>
+                            <constraint firstItem="QEM-mu-cYF" firstAttribute="bottom" secondItem="BBW-V9-7m8" secondAttribute="bottom" id="slw-bb-Au7"/>
+                            <constraint firstItem="VD2-3j-cV4" firstAttribute="centerX" secondItem="BBW-V9-7m8" secondAttribute="centerX" id="tVw-LE-Kic"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="BBW-V9-7m8"/>
                     </view>
                     <connections>
                         <outlet property="MapView" destination="QEM-mu-cYF" id="j0a-Lg-fEt"/>
+                        <outlet property="cameraButton" destination="VD2-3j-cV4" id="6t6-yX-exq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oep-fL-pgS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="459.5" y="217.5"/>
+            <point key="canvasLocation" x="458.39999999999998" y="217.24137931034485"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="CameraIcon" width="100" height="100"/>
+    </resources>
 </document>
