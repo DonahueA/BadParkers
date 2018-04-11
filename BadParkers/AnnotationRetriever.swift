@@ -11,7 +11,6 @@ import MapKit
 import Firebase
 
 protocol AnnotationRetrieverDelegate: class {
-    
     func annotationsDidChange(annotations: [ImageAnnotation])
 }
 

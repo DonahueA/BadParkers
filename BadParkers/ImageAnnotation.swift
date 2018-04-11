@@ -18,6 +18,4 @@ class ImageAnnotation: NSObject, MKAnnotation {
         self.coordinate = coordinate
         self.url = url
     }
-    
-    
 }

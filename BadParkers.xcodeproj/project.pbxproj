@@ -17,6 +17,7 @@
 		97D50E8520548D87003FC60C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97D50E8420548D87003FC60C /* Assets.xcassets */; };
 		97D50E8820548D87003FC60C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97D50E8620548D87003FC60C /* LaunchScreen.storyboard */; };
 		97D50E94205490B0003FC60C /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D50E93205490B0003FC60C /* HomeScreenViewController.swift */; };
+		97EE9EB62079A662006D22F2 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EE9EB52079A662006D22F2 /* CommentViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		97D50E8720548D87003FC60C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97D50E8920548D87003FC60C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		97D50E93205490B0003FC60C /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
+		97EE9EB52079A662006D22F2 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CommentViewController.swift; path = /Users/donahueavila/Documents/Projects/BadParkers/BadParkers/CommentViewController.swift; sourceTree = "<absolute>"; };
 		AC74EB63F6833E62F05470EB /* Pods_BadParkers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BadParkers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCFDED0FD156E56D47C8A967 /* Pods-BadParkers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BadParkers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BadParkers/Pods-BadParkers.debug.xcconfig"; sourceTree = "<group>"; };
 		F07EB1FC67B9704C169A44F7 /* Pods-BadParkers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BadParkers.release.xcconfig"; path = "Pods/Target Support Files/Pods-BadParkers/Pods-BadParkers.release.xcconfig"; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 		97D50E7C20548D87003FC60C /* BadParkers */ = {
 			isa = PBXGroup;
 			children = (
+				97EE9EB52079A662006D22F2 /* CommentViewController.swift */,
 				97D50E93205490B0003FC60C /* HomeScreenViewController.swift */,
 				973034B92054C82A008935B4 /* ImageAnnotationView.swift */,
 				973034B72054BC34008935B4 /* ImageAnnotation.swift */,
@@ -250,6 +253,7 @@
 			files = (
 				97D50E7E20548D87003FC60C /* AppDelegate.swift in Sources */,
 				975CC3F020559AA3002CC002 /* AnnotationRetriever.swift in Sources */,
+				97EE9EB62079A662006D22F2 /* CommentViewController.swift in Sources */,
 				973034BA2054C82A008935B4 /* ImageAnnotationView.swift in Sources */,
 				97D50E94205490B0003FC60C /* HomeScreenViewController.swift in Sources */,
 				973034B82054BC34008935B4 /* ImageAnnotation.swift in Sources */,
