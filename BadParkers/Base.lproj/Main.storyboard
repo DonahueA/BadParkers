@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sjQ-bd-wN0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RT1-36-5mn">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="QEM-mu-cYF">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </mapView>
                             <imageView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CameraIcon" translatesAutoresizingMaskIntoConstraints="NO" id="VD2-3j-cV4">
                                 <rect key="frame" x="137" y="552" width="100" height="100"/>
@@ -36,14 +36,16 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="BBW-V9-7m8"/>
                     </view>
+                    <navigationItem key="navigationItem" id="OKF-C5-O48"/>
                     <connections>
                         <outlet property="MapView" destination="QEM-mu-cYF" id="j0a-Lg-fEt"/>
                         <outlet property="cameraButton" destination="VD2-3j-cV4" id="6t6-yX-exq"/>
+                        <segue destination="iHW-qZ-YsX" kind="show" identifier="commentView" id="H6h-Lf-7j2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oep-fL-pgS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="458.39999999999998" y="217.24137931034485"/>
+            <point key="canvasLocation" x="546" y="-134"/>
         </scene>
         <!--Comment View Controller-->
         <scene sceneID="nu0-m8-uOX">
@@ -99,7 +101,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wgs-Tl-Tps" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1343.2" y="217.24137931034485"/>
+            <point key="canvasLocation" x="1319" y="-134"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="QCo-z5-Lwd">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RT1-36-5mn" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="gax-Br-AON">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="sjQ-bd-wN0" kind="relationship" relationship="rootViewController" id="kES-ix-Lld"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1mc-oI-Nym" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-256" y="-134.03298350824588"/>
         </scene>
     </scenes>
     <resources>

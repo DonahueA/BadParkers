@@ -40,6 +40,16 @@ class HomeScreenViewController: UIViewController {
         imagePickerController.delegate = self
         present(imagePickerController, animated: true, completion: nil)
     }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier, identifier == "commentView", let cvc = segue.destination as? CommentViewController {
+            if let dataId = (sender as? ImageAnnotationView)?.dataId {
+                
+                cvc.dataId = dataId
+            }
+        }
+    }
 }
 
 extension HomeScreenViewController: MKMapViewDelegate {
@@ -57,6 +67,11 @@ extension HomeScreenViewController: MKMapViewDelegate {
         }
         return view
     }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        performSegue(withIdentifier: "commentView", sender: view)
+    }
+    
     
     //Useless since annotaitonGetter grabs all, not dependent on current region
 //    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated:

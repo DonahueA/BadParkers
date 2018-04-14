@@ -12,6 +12,7 @@ class ImageAnnotationView: MKAnnotationView {
     
     var url : URL?
     var carImage: UIImage?
+    var dataId: Int?
     
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
@@ -42,18 +43,6 @@ class ImageAnnotationView: MKAnnotationView {
         
     }
     
-    //TODO: Figure out what to do when selected
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        if selected {
-            setNeedsDisplay()
-            print("Selected")
-            //load bigger image or prepare for segue
-        } else {
-            //deselect
-        }
-    }
-    
     private func fetchImage() {
         if let url = url {
             DispatchQueue.global(qos: .userInitiated).async {
@@ -71,4 +60,8 @@ class ImageAnnotationView: MKAnnotationView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    
+    
+
+    
 }

@@ -11,7 +11,7 @@ class CommentViewController: UIViewController {
     
     let authors = ["Donahue", "Angi", "Donahue"]
     let comments = ["Hi", "Hey" , "hoi"]
-    
+    var dataId : Int?
     @IBOutlet var CommentTable: UITableView!
     @IBOutlet var Image: UIImageView!
     
