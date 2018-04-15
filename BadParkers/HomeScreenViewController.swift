@@ -48,6 +48,7 @@ class HomeScreenViewController: UIViewController {
                 cvc.dataId = dataId
             }
         }
+        
     }
 }
 
@@ -59,9 +60,10 @@ extension HomeScreenViewController: MKMapViewDelegate {
         var view : ImageAnnotationView
         
         if let dequedView = mapView.dequeueReusableAnnotationView(withIdentifier: "ImageMarker") as? ImageAnnotationView {
-            dequedView.annotation = annotation
             
+            dequedView.annotation = annotation
             view = dequedView
+            
         }else{
             view = ImageAnnotationView(annotation: annotation, reuseIdentifier: identifier)
         }
@@ -70,10 +72,11 @@ extension HomeScreenViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         performSegue(withIdentifier: "commentView", sender: view)
+        mapView.deselectAnnotation(view.annotation, animated: false)
     }
     
     
-    //Useless since annotaitonGetter grabs all, not dependent on current region
+//  Useless since annotationGetter grabs all, not dependent on current region
 //    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated:
 //        annotationGetter.mapRegion = mapView.region
 //    }
