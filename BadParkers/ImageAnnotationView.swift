@@ -12,12 +12,13 @@ class ImageAnnotationView: MKAnnotationView {
     
     var url : URL?
     var carImage: UIImage?
-    var dataId: Int?
+    var dataId: String?
     
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
-        super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
+        super.init(annotation: annotation, reuseIdentifier: reuseIdentifier) // What is going on
         if let annotation = annotation as? ImageAnnotation {
             url = annotation.url
+            dataId = annotation.dataId
             
         }
         frame = CGRect(x: 0, y: 0, width: 70, height: 70)

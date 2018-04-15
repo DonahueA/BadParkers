@@ -12,6 +12,8 @@
 		973034BA2054C82A008935B4 /* ImageAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973034B92054C82A008935B4 /* ImageAnnotationView.swift */; };
 		973034BC205575C9008935B4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 973034BB205575C8008935B4 /* GoogleService-Info.plist */; };
 		975CC3F020559AA3002CC002 /* AnnotationRetriever.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975CC3EF20559AA3002CC002 /* AnnotationRetriever.swift */; };
+		979A6F7920832F7A000A3125 /* CommentCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979A6F7820832F7A000A3125 /* CommentCreationViewController.swift */; };
+		979A6F812083C021000A3125 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979A6F802083C021000A3125 /* Comment.swift */; };
 		97D50E7E20548D87003FC60C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D50E7D20548D87003FC60C /* AppDelegate.swift */; };
 		97D50E8320548D87003FC60C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97D50E8120548D87003FC60C /* Main.storyboard */; };
 		97D50E8520548D87003FC60C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97D50E8420548D87003FC60C /* Assets.xcassets */; };
@@ -25,6 +27,8 @@
 		973034B92054C82A008935B4 /* ImageAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAnnotationView.swift; sourceTree = "<group>"; };
 		973034BB205575C8008935B4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		975CC3EF20559AA3002CC002 /* AnnotationRetriever.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationRetriever.swift; sourceTree = "<group>"; };
+		979A6F7820832F7A000A3125 /* CommentCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCreationViewController.swift; sourceTree = "<group>"; };
+		979A6F802083C021000A3125 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		97D50E7A20548D87003FC60C /* BadParkers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BadParkers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97D50E7D20548D87003FC60C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		97D50E8220548D87003FC60C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -88,7 +92,9 @@
 		97D50E7C20548D87003FC60C /* BadParkers */ = {
 			isa = PBXGroup;
 			children = (
+				979A6F7820832F7A000A3125 /* CommentCreationViewController.swift */,
 				97EE9EB52079A662006D22F2 /* CommentViewController.swift */,
+				979A6F802083C021000A3125 /* Comment.swift */,
 				97D50E93205490B0003FC60C /* HomeScreenViewController.swift */,
 				973034B92054C82A008935B4 /* ImageAnnotationView.swift */,
 				973034B72054BC34008935B4 /* ImageAnnotation.swift */,
@@ -252,7 +258,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				97D50E7E20548D87003FC60C /* AppDelegate.swift in Sources */,
+				979A6F7920832F7A000A3125 /* CommentCreationViewController.swift in Sources */,
 				975CC3F020559AA3002CC002 /* AnnotationRetriever.swift in Sources */,
+				979A6F812083C021000A3125 /* Comment.swift in Sources */,
 				97EE9EB62079A662006D22F2 /* CommentViewController.swift in Sources */,
 				973034BA2054C82A008935B4 /* ImageAnnotationView.swift in Sources */,
 				97D50E94205490B0003FC60C /* HomeScreenViewController.swift in Sources */,

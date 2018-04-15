@@ -45,7 +45,6 @@ class HomeScreenViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier, identifier == "commentView", let cvc = segue.destination as? CommentViewController {
             if let dataId = (sender as? ImageAnnotationView)?.dataId {
-                
                 cvc.dataId = dataId
             }
         }
@@ -61,6 +60,7 @@ extension HomeScreenViewController: MKMapViewDelegate {
         
         if let dequedView = mapView.dequeueReusableAnnotationView(withIdentifier: "ImageMarker") as? ImageAnnotationView {
             dequedView.annotation = annotation
+            
             view = dequedView
         }else{
             view = ImageAnnotationView(annotation: annotation, reuseIdentifier: identifier)
@@ -98,7 +98,16 @@ extension HomeScreenViewController: UIImagePickerControllerDelegate, UINavigatio
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
-        
         dismiss(animated: true, completion: nil)
+        if let image = info["UIImagePickerControllerOriginalImage"] as? UIImage {
+            print("Image size: \(image.size)")
+        }
+        
+        if (locationManager.location?.coordinate) != nil { //let coords = then use cords
+            annotationGetter.newPost(withCoords: MapView.centerCoordinate)
+            
+            
+        }
+        
     }
 }

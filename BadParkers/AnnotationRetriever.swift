@@ -28,6 +28,11 @@ class AnnotationRetriever {
     
     private(set) var ImageAnnotations : [ImageAnnotation] = []
     
+    public func newPost(withCoords coords: CLLocationCoordinate2D) {
+        db.collection("photoLocations").addDocument(data: ["location":  GeoPoint(latitude: coords.latitude, longitude: coords.longitude)])
+        getImageAnnotations()
+    }
+    
     private func getImageAnnotations() {
         
         //TODO: Make asynchronous if need be
@@ -37,10 +42,10 @@ class AnnotationRetriever {
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
-                
                 for document in QuerySnapshot!.documents {
+                    print(document.documentID)
                     if let coordinates = document.data()["location"] as? GeoPoint {
-                        let newImage = ImageAnnotation(coordinates.CLLocation(), URL(string: "https://b.thumbs.redditmedia.com/p_mhrqWy_56i8-oMDS_48XRAybZd2nm-URldx4F6D0c.jpg")!)
+                        let newImage = ImageAnnotation(coordinates.CLLocation(), URL(string: "https://b.thumbs.redditmedia.com/p_mhrqWy_56i8-oMDS_48XRAybZd2nm-URldx4F6D0c.jpg")!, document.documentID)
                         
                         if !self.ImageAnnotations.contains(newImage)
                         {
