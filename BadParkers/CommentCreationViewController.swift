@@ -59,7 +59,7 @@ extension CommentCreationViewController : UITextViewDelegate, UITextFieldDelegat
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let textLength = textView.text!.count + text.count
-        return textLength <= 50
+        return textLength <= 140
     }
     
     func textViewShouldEndEditing(_ textView: UITextView) -> Bool {

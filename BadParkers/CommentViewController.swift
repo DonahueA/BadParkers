@@ -69,6 +69,8 @@ extension CommentViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath)
         cell.textLabel?.text = comments[indexPath.row].Author
+        cell.detailTextLabel?.lineBreakMode = .byWordWrapping
+        cell.detailTextLabel?.numberOfLines = 0
         cell.detailTextLabel?.text = comments[indexPath.row].Comment
         return cell
     }
