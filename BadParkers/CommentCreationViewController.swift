@@ -26,7 +26,6 @@ class CommentCreationViewController: UIViewController {
             colRef.addDocument(data: ["Author": name, "Comment" : commentTextView.text, "Date" : Date() ])
             dismiss(animated: true, completion: nil)
         }
-
     }
     
     @IBAction func cancelButton(_ sender: UIButton) {
@@ -52,6 +51,15 @@ extension CommentCreationViewController : UITextViewDelegate, UITextFieldDelegat
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let textLength = textField.text!.count + string.count
+        return textLength <= 10
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let textLength = textView.text!.count + text.count
+        return textLength <= 50
     }
     
     func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
