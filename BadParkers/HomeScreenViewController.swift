@@ -101,16 +101,10 @@ extension HomeScreenViewController: UIImagePickerControllerDelegate, UINavigatio
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
-        dismiss(animated: true, completion: nil)
-        if let image = info["UIImagePickerControllerOriginalImage"] as? UIImage {
-            print("Image size: \(image.size)")
-        }
-        
-        if (locationManager.location?.coordinate) != nil { //let coords = then use cords
+        if let image = info["UIImagePickerControllerOriginalImage"] as? UIImage, let coords = locationManager.location?.coordinate {
             annotationGetter.newPost(withCoords: MapView.centerCoordinate)
-            
-            
         }
         
+        dismiss(animated: true, completion: nil)
     }
 }
