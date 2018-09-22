@@ -8,12 +8,15 @@
 import UIKit
 import Firebase
 
-class CommentViewController: UIViewController {
+class CommentViewController: UIViewController{
     
 
     
     @IBOutlet var CommentTable: UITableView!
     @IBOutlet var Image: UIImageView!
+    
+    @IBOutlet var commentTextfield: UITextField!
+    @IBOutlet var commentHeight: NSLayoutConstraint!
     
     var dataId: String?
     
@@ -44,6 +47,10 @@ class CommentViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow
+            , object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        commentTextfield.delegate = self
         CommentTable.delegate = self
         CommentTable.dataSource = self
         
@@ -57,6 +64,16 @@ class CommentViewController: UIViewController {
             modal.dataId = dataId
         }
     }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let duration = notification.userInfo?["UIKeyboardAnimationDurationUserInfoKey"] as? Double, let curve = notification.userInfo?["UIKeyboardAnimationCurveUserInfoKey"] as? UInt, let height = (notification.userInfo?["UIKeyboardFrameEndUserInfoKey"] as? NSValue)?.cgRectValue.height{
+            UIView.animate(withDuration: duration, delay: 0, options: UIViewAnimationOptions(rawValue: curve), animations: {[weak self] in self?.commentHeight.constant = height; self?.view.layoutIfNeeded()}, completion: nil)
+        }
+    }
+    @objc func keyboardWillHide(notification: NSNotification) {
+        commentHeight.constant = 0
+    }
+    
 
 }
 
@@ -74,4 +91,23 @@ extension CommentViewController : UITableViewDelegate, UITableViewDataSource {
         cell.detailTextLabel?.text = comments[indexPath.row].Comment
         return cell
     }
+}
+
+extension CommentViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        commentTextfield.resignFirstResponder()
+        return true
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let text = textField.text{
+            colRef.addDocument(data: ["Author": "Anonymous", "Comment" : text, "Date" : Date() ])
+            textField.text! = ""
+        }
+        
+    }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let textLength = textField.text!.count + string.count
+        return textLength <= 140
+    }
+    
 }
