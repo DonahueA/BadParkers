@@ -47,9 +47,9 @@ class CommentViewController: UIViewController{
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification
             , object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         commentTextfield.delegate = self
         CommentTable.delegate = self
         CommentTable.dataSource = self
@@ -59,15 +59,9 @@ class CommentViewController: UIViewController{
         quoteListener.remove()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let identifier = segue.identifier, identifier == "commentCreation", let modal = segue.destination as? CommentCreationViewController {
-            modal.dataId = dataId
-        }
-    }
-    
     @objc func keyboardWillShow(notification: NSNotification) {
         if let duration = notification.userInfo?["UIKeyboardAnimationDurationUserInfoKey"] as? Double, let curve = notification.userInfo?["UIKeyboardAnimationCurveUserInfoKey"] as? UInt, let height = (notification.userInfo?["UIKeyboardFrameEndUserInfoKey"] as? NSValue)?.cgRectValue.height{
-            UIView.animate(withDuration: duration, delay: 0, options: UIViewAnimationOptions(rawValue: curve), animations: {[weak self] in self?.commentHeight.constant = height; self?.view.layoutIfNeeded()}, completion: nil)
+            UIView.animate(withDuration: duration, delay: 0, options: UIView.AnimationOptions(rawValue: curve), animations: {[weak self] in self?.commentHeight.constant = height; self?.view.layoutIfNeeded()}, completion: nil)
         }
     }
     @objc func keyboardWillHide(notification: NSNotification) {
