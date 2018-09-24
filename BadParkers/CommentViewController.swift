@@ -19,9 +19,10 @@ class CommentViewController: UIViewController{
     @IBOutlet var commentHeight: NSLayoutConstraint!
     
     var dataId: String?
-    
+    var imageURL: URL?
     var comments: [Comment] = []
     
+    let storage = Storage.storage()
     var colRef: CollectionReference!
     var quoteListener: ListenerRegistration!
     
@@ -53,10 +54,17 @@ class CommentViewController: UIViewController{
         commentTextfield.delegate = self
         CommentTable.delegate = self
         CommentTable.dataSource = self
-        
+        downloadImage()
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         quoteListener.remove()
+    }
+    
+    func downloadImage() {
+        if let imageURL = imageURL {
+            print("\(imageURL)")
+        }
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -93,7 +101,7 @@ extension CommentViewController: UITextFieldDelegate {
         return true
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if let text = textField.text{
+        if let text = textField.text, text.count > 0 {
             colRef.addDocument(data: ["Author": "Anonymous", "Comment" : text, "Date" : Date() ])
             textField.text! = ""
         }

@@ -27,7 +27,6 @@ class HomeScreenViewController: UIViewController {
         }
         
         let press = UITapGestureRecognizer(target: self, action: #selector(openCamera))
-        
         cameraButton.addGestureRecognizer(press)
         
         annotationGetter.delegate = self
@@ -35,8 +34,9 @@ class HomeScreenViewController: UIViewController {
     }
     
     @objc func openCamera() {
+        
         let imagePickerController = UIImagePickerController()
-        imagePickerController.sourceType = .photoLibrary
+        imagePickerController.sourceType = .camera
         imagePickerController.delegate = self
         present(imagePickerController, animated: true, completion: nil)
     }
@@ -44,8 +44,9 @@ class HomeScreenViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier, identifier == "commentView", let cvc = segue.destination as? CommentViewController {
-            if let dataId = (sender as? ImageAnnotationView)?.dataId {
+            if let dataId = (sender as? ImageAnnotationView)?.dataId, let carURL = (sender as? ImageAnnotationView)?.url {
                 cvc.dataId = dataId
+                cvc.imageURL = carURL
             }
         }
         
@@ -100,12 +101,12 @@ extension HomeScreenViewController: UIImagePickerControllerDelegate, UINavigatio
         dismiss(animated: true, completion: nil)
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-// Local variable inserted by Swift 4.2 migrator.
-let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+        // Local variable inserted by Swift 4.2 migrator.
+        let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
 
         
         if let image = info["UIImagePickerControllerOriginalImage"] as? UIImage, let coords = locationManager.location?.coordinate {
-            annotationGetter.newPost(withCoords: MapView.centerCoordinate)
+            annotationGetter.newPost(withCoords: coords, withImage: image)
         }
         
         dismiss(animated: true, completion: nil)
