@@ -12,12 +12,12 @@ import MapKit
 class ImageAnnotation: NSObject, MKAnnotation {
     
     var coordinate: CLLocationCoordinate2D
-    var url : URL
+    var reference : String
     var dataId: String
     
-    init(_ coordinate: CLLocationCoordinate2D, _ url:URL, _ dataId: String) {
+    init(_ coordinate: CLLocationCoordinate2D, _ reference:String, _ dataId: String) {
         self.coordinate = coordinate
-        self.url = url
+        self.reference = reference
         self.dataId = dataId
     }
 }

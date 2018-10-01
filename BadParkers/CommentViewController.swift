@@ -14,12 +14,13 @@ class CommentViewController: UIViewController{
     
     @IBOutlet var CommentTable: UITableView!
     @IBOutlet var Image: UIImageView!
+    @IBOutlet var loadingIndicator: UIActivityIndicatorView!
     
     @IBOutlet var commentTextfield: UITextField!
     @IBOutlet var commentHeight: NSLayoutConstraint!
     
     var dataId: String?
-    var imageURL: URL?
+    var imageReference: String?
     var comments: [Comment] = []
     
     let storage = Storage.storage()
@@ -28,6 +29,16 @@ class CommentViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        let pathReference = storage.reference(withPath: imageReference!)
+        pathReference.getData(maxSize: 1024*1024*10) { [weak self] (data, error) in
+            if error != nil {
+                print("Error downloading image icon")
+            } else {
+                self?.Image.image = UIImage(data: data!)
+                self?.loadingIndicator.stopAnimating()
+                self?.Image.isHidden = false
+            }
+        }
         
         colRef = Firestore.firestore().collection("photoLocations/\(dataId!)/comments/")
         quoteListener = colRef.addSnapshotListener({ (QuerySnapshot, Error) in
@@ -55,25 +66,12 @@ class CommentViewController: UIViewController{
         commentTextfield.delegate = self
         CommentTable.delegate = self
         CommentTable.dataSource = self
-        downloadImage()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         quoteListener.remove()
     }
     
-    func downloadImage() {
-        if let imageURL = imageURL {
-            DispatchQueue.global(qos: .userInitiated).async {
-                [weak self] in let urlContents = try? Data(contentsOf: imageURL)
-                DispatchQueue.main.async {
-                    if let imageData = urlContents {
-                        self?.Image.image = UIImage(data: imageData);
-                    }
-                }
-            }
-        }
-    }
     
     @objc func keyboardWillShow(notification: NSNotification) {
         if let duration = notification.userInfo?["UIKeyboardAnimationDurationUserInfoKey"] as? Double, let curve = notification.userInfo?["UIKeyboardAnimationCurveUserInfoKey"] as? UInt, let height = (notification.userInfo?["UIKeyboardFrameEndUserInfoKey"] as? NSValue)?.cgRectValue.height{

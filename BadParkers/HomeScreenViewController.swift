@@ -16,7 +16,12 @@ class HomeScreenViewController: UIViewController {
     let locationManager = CLLocationManager()
     
     private lazy var annotationGetter = AnnotationRetriever(with: MapView.region)
-    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: animated);
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,9 +49,9 @@ class HomeScreenViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier, identifier == "commentView", let cvc = segue.destination as? CommentViewController {
-            if let dataId = (sender as? ImageAnnotationView)?.dataId, let carURL = (sender as? ImageAnnotationView)?.url {
-                cvc.dataId = dataId                
-                cvc.imageURL = URL(string: carURL.absoluteString.replacingOccurrences(of: "_icon", with: ""))!
+            if let dataId = (sender as? ImageAnnotationView)?.dataId, let imageReference = (sender as? ImageAnnotationView)?.reference {
+                cvc.dataId = dataId
+                cvc.imageReference = imageReference.replacingOccurrences(of: "_icon", with: "")
             }
         }
         

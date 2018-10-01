@@ -43,6 +43,9 @@ class AnnotationRetriever {
             
             //Make smaller image?
             let metaData = StorageMetadata()
+            metaData.contentType = "image/jpeg";
+            
+            iconImageRef.putData(iconData, metadata: metaData)
             iconImageRef.putData(iconData)
             newImageRef.putData(data, metadata: metaData) { [unowned self](metaData, error) in
                 if error != nil {
@@ -71,20 +74,11 @@ class AnnotationRetriever {
                 for document in QuerySnapshot!.documents {
                     print(document.documentID)
                     if let coordinates = document.data()["location"] as? GeoPoint, let imageURL = document.data()["ICON_URL"] as? String {
-                        let downloadImageRef = self.storageRef.child(imageURL)
-                        downloadImageRef.downloadURL(completion: { (url, error) in
-                            if let error = error {
-                                print(error)
-                            }else if let url = url {
-                                let newImage = ImageAnnotation(coordinates.CLLocation(), URL(string: url.absoluteString)!, document.documentID)
-                                if !self.ImageAnnotations.contains(newImage)
-                                {
-                                    self.ImageAnnotations.append(newImage)
-                                }
-                            }
-                        })
-                        
-
+                        let newImage = ImageAnnotation(coordinates.CLLocation(), imageURL, document.documentID)
+                        if !self.ImageAnnotations.contains(newImage)
+                        {
+                            self.ImageAnnotations.append(newImage)
+                        }
                         
                     }
                 }
