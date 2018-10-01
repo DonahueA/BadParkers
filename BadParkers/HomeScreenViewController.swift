@@ -45,8 +45,8 @@ class HomeScreenViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier, identifier == "commentView", let cvc = segue.destination as? CommentViewController {
             if let dataId = (sender as? ImageAnnotationView)?.dataId, let carURL = (sender as? ImageAnnotationView)?.url {
-                cvc.dataId = dataId
-                cvc.imageURL = carURL
+                cvc.dataId = dataId                
+                cvc.imageURL = URL(string: carURL.absoluteString.replacingOccurrences(of: "_icon", with: ""))!
             }
         }
         

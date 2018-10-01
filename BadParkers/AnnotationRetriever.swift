@@ -38,8 +38,8 @@ class AnnotationRetriever {
         if let data = resizedImage.jpegData(compressionQuality: 0.4), let iconData = image.makeIcon().jpegData(compressionQuality: 1) {
             let uuid = UUID()
             
-            let newImageRef = storageRef.child("BadParkers/fullsized/\(uuid).jpg")
-            let iconImageRef = storageRef.child("BardParkes/icons/\(uuid).jpg")
+            let newImageRef = storageRef.child("BadParkers/Images/\(uuid).jpg")
+            let iconImageRef = storageRef.child("BadParkers/Images/\(uuid)_icon.jpg")
             
             //Make smaller image?
             let metaData = StorageMetadata()
@@ -49,7 +49,7 @@ class AnnotationRetriever {
                     print(error?.localizedDescription ?? "Error uploading file.")
                     
                 }else{
-                    self.db.collection("photoLocations").addDocument(data: ["location":          GeoPoint(latitude: coords.latitude, longitude: coords.longitude), "URL": newImageRef.fullPath, "ICON": iconImageRef.fullPath])
+                    self.db.collection("photoLocations").addDocument(data: ["location":          GeoPoint(latitude: coords.latitude, longitude: coords.longitude), "URL": newImageRef.fullPath, "ICON_URL":iconImageRef.fullPath])
                     
                     self.getImageAnnotations()
                 }
@@ -70,7 +70,7 @@ class AnnotationRetriever {
             } else {
                 for document in QuerySnapshot!.documents {
                     print(document.documentID)
-                    if let coordinates = document.data()["location"] as? GeoPoint, let imageURL = document.data()["ICON"] as? String {
+                    if let coordinates = document.data()["location"] as? GeoPoint, let imageURL = document.data()["ICON_URL"] as? String {
                         let downloadImageRef = self.storageRef.child(imageURL)
                         downloadImageRef.downloadURL(completion: { (url, error) in
                             if let error = error {
@@ -88,7 +88,6 @@ class AnnotationRetriever {
                         
                     }
                 }
-                //.
                 self.delegate?.annotationsDidChange(annotations: (self.ImageAnnotations))
             }
         })
@@ -136,6 +135,7 @@ extension UIImage {
         let newImage = self.cgImage?.cropping(to: cropRect)
         return UIImage(cgImage: newImage!, scale: self.scale, orientation: self.imageOrientation)
     }
+    
     func makeIcon() -> UIImage {
         
         let imageSize = CGSize(width: 70, height: 70)

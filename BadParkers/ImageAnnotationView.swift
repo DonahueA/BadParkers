@@ -15,7 +15,7 @@ class ImageAnnotationView: MKAnnotationView {
     var dataId: String?
     
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
-        super.init(annotation: annotation, reuseIdentifier: reuseIdentifier) // What is going on
+        super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
         if let annotation = annotation as? ImageAnnotation {
             url = annotation.url
             dataId = annotation.dataId

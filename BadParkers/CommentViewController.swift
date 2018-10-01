@@ -28,6 +28,7 @@ class CommentViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         colRef = Firestore.firestore().collection("photoLocations/\(dataId!)/comments/")
         quoteListener = colRef.addSnapshotListener({ (QuerySnapshot, Error) in
             if let err = Error {
@@ -63,7 +64,14 @@ class CommentViewController: UIViewController{
     
     func downloadImage() {
         if let imageURL = imageURL {
-            print("\(imageURL)")
+            DispatchQueue.global(qos: .userInitiated).async {
+                [weak self] in let urlContents = try? Data(contentsOf: imageURL)
+                DispatchQueue.main.async {
+                    if let imageData = urlContents {
+                        self?.Image.image = UIImage(data: imageData);
+                    }
+                }
+            }
         }
     }
     
